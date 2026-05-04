@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import { Register } from "./Register";
-import { Login } from "./Login";
-import { Dashboard } from "./Dashboard";
+import { Register } from "../pages/Register";
+import { Login } from "../pages/Login";
+import { Dashboard } from "../pages/Dashboard";
 
 /**
  * Application routing configuration

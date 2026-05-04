@@ -1,40 +1,21 @@
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { AppRoutes } from './AppRoutes';
+import Header from './components/Header';
+
+import { AppRoutes } from './routes/AppRoutes';
 
 /**
  * Main App component
- * Provides navigation and routing for the entire application
+ * Renders the shared header, page routes, and footer.
  */
 function App() {
-  // Get authentication state from Redux store
-  const { isAuthenticated, fullName } = useSelector(state => state.auth);
-
   return (
-    <div className="app">
-      <header className="app-header">
-        <h1>University App</h1>
-
-        <nav className="app-navigation">
-          {isAuthenticated ? (
-            // Authenticated user navigation
-            <>
-              <span className="welcome-message">Welcome, {fullName}!</span>
-              <NavLink to="/dashboard">Dashboard</NavLink>
-            </>
-          ) : (
-            // Unauthenticated user navigation
-            <>
-              <NavLink to="/login">Login</NavLink>
-              <NavLink to="/register">Register</NavLink>
-            </>
-          )}
-        </nav>
-      </header>
+    <div className="app-shell min-h-screen bg-slate-50 text-slate-900">
+      <Header />
 
       <main className="app-main">
         <AppRoutes />
       </main>
+
+     
     </div>
   );
 }

@@ -1,0 +1,46 @@
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #111827 0%, #1e293b 30%, #4338ca 65%, #0ea5e9 100%);
+  color: #f8fafc;
+  padding: 2rem 1rem;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.18);
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+.app-header-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.8rem;
+  color: #93c5fd;
+}
+
+.heading {
+  margin: 0;
+  font-size: clamp(2rem, 2.5vw, 3rem);
+  line-height: 1.05;
+}
+
+.subheading {
+  margin: 0.75rem 0 0;
+  max-width: 44rem;
+  color: #cbd5e1;
+  font-size: 1rem;
+}
+
+
+
