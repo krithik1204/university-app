@@ -2,14 +2,14 @@
   display: flex;
   min-height: 100vh;
   background: linear-gradient(180deg, #ffffff, #eef2ff);
+  align-items: flex-start;
 }
 
 .dashboard-sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: sticky;
+  top: calc(var(--app-header-height) + 1rem);
   width: 280px;
-  height: 100vh;
+  height: calc(100vh - var(--app-header-height) - 2rem);
   background: linear-gradient(135deg, #111827 0%, #1e293b 30%, #4338ca 65%, #0ea5e9 100%);
   color: #f8fafc;
   padding: 2rem 1.5rem;
@@ -19,12 +19,92 @@
   box-shadow: 12px 0 40px rgba(15, 23, 42, 0.25);
 }
 
+.dashboard-sidebar.teacher-sidebar {
+  width: 300px;
+  background: linear-gradient(135deg, #1f2937 0%, #334155 30%, #2563eb 65%, #38bdf8 100%);
+}
+
+.dashboard-sidebar.student-sidebar {
+  width: 280px;
+  background: linear-gradient(135deg, #111827 0%, #1e293b 30%, #4338ca 65%, #0ea5e9 100%);
+}
+
+.sidebar-subtitle {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: rgba(241, 245, 249, 0.78);
+}
+
+.nav-group {
+  margin-bottom: 1.5rem;
+}
+
+.nav-group-title {
+  margin-bottom: 0.85rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(248, 250, 252, 0.85);
+}
+
+.metric-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.95rem 1rem;
+  border-radius: 0.95rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.metric-card span {
+  font-size: 0.85rem;
+  color: rgba(241, 245, 249, 0.8);
+}
+
+.metric-card strong {
+  font-size: 1.05rem;
+  color: #ffffff;
+}
+
 .dashboard-main {
   flex: 1;
-  margin-left: 280px;
   padding: 2rem;
   display: flex;
   flex-direction: column;
+}
+
+.dashboard-main.no-sidebar {
+  width: 100%;
+  margin-left: 0;
+}
+
+.unauthorized-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 280px;
+  padding: 1.5rem;
+}
+
+.unauthorized-card {
+  max-width: 600px;
+  width: 100%;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 16px;
+  background: #ffffff;
+  padding: 2rem;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+}
+
+.unauthorized-card h1 {
+  margin-bottom: 0.75rem;
+}
+
+.unauthorized-card p {
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
 }
 
 .sidebar-header {

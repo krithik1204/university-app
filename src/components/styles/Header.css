@@ -42,5 +42,29 @@
   font-size: 1rem;
 }
 
+.header-quote {
+  margin-top: 1.5rem;
+  padding: 1.2rem 1.4rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(10px);
+  max-width: 50rem;
+}
+
+.quote-text {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #e2e8f0;
+}
+
+.quote-author {
+  margin: 0.85rem 0 0;
+  font-size: 0.95rem;
+  color: #93c5fd;
+  font-weight: 600;
+}
+
 
 

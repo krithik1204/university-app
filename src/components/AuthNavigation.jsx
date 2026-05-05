@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../features/auth/authSlice';
 import './styles/AuthNavigation.css';
 
+const normalizeRole = (role) => String(role || '').toUpperCase().replace(/^ROLE_/, '');
+
 /**
  * AuthNavigation component
  * Renders login/register links for unauthenticated users and
@@ -11,7 +13,12 @@ import './styles/AuthNavigation.css';
 export const AuthNavigation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAuthenticated, fullName } = useSelector(state => state.auth);
+  const { isAuthenticated, fullName, roles } = useSelector(state => state.auth);
+
+  const normalizedRoles = Array.isArray(roles)
+    ? roles.map(normalizeRole).filter(Boolean)
+    : [normalizeRole(roles)].filter(Boolean);
+  const roleText = normalizedRoles.join(', ') || 'Student';
 
   const handleLogout = () => {
     dispatch(logout());
@@ -19,20 +26,13 @@ export const AuthNavigation = () => {
   };
 
   return (
-    <nav className="flex items-center gap-4">
+    <nav className="auth-nav flex items-center gap-4">
       {isAuthenticated ? (
         <>
-          <span className="text-sm text-slate-200">
+          <span className="auth-welcome text-sm text-slate-200">
             Welcome, <strong>{fullName || 'User'}</strong>
           </span>
-          <NavLink
-            to="/dashboard"
-            className={({ isActive }) =>
-              `text-slate-100 hover:text-white ${isActive ? 'font-semibold' : 'font-medium'}`
-            }
-          >
-            Dashboard
-          </NavLink>
+          <span className="auth-role-badge">{roleText}</span>
           <button
             type="button"
             onClick={handleLogout}

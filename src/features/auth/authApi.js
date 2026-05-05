@@ -94,13 +94,15 @@ export const parseAuthResponse = (responseData) => {
   const userLastName = user.lastName || '';
   const fullName = `${userFirstName} ${userLastName}`.trim();
   const userId = user.id ? String(user.id) : null;
-  const roles = user.roles || [];
+  const rawRoles = user.roles ?? user.role ?? [];
+  const rolesArray = Array.isArray(rawRoles) ? rawRoles : rawRoles ? [rawRoles] : [];
+  const normalizedRoles = rolesArray.map((r) => String(r || "").toUpperCase());
 
   return {
     accessToken,
     refreshToken: refreshToken || null,
     userId,
     fullName,
-    roles
+    roles: normalizedRoles
   };
 };

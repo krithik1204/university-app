@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { logout } from "../features/auth/authSlice";
 import { getUserProfile } from "../features/profile/profileApi";
@@ -12,6 +12,10 @@ import "./styles/Dashboard.css";
 export const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const isAdminArea = location.pathname.startsWith("/dashboard/admin");
+  const currentAdminSection = location.pathname.replace("/dashboard/admin/", "") || "overview";
+
   const { fullName, roles, userId, isAuthenticated } = useSelector(
     (state) => state.auth
   );
@@ -53,99 +57,99 @@ export const Dashboard = () => {
     return null;
   }
 
+  const studentLinks = [
+    { to: "/dashboard", label: "My Courses", icon: "📚" },
+    { to: "/dashboard/assignments", label: "Assignments", icon: "📝" },
+    { to: "/dashboard/grades", label: "Grades", icon: "📊" },
+    { to: "/dashboard/schedule", label: "Schedule", icon: "🗓️" },
+  ];
+
+  const teacherLinks = [
+    { to: "/dashboard", label: "My Classes", icon: "🏫" },
+    { to: "/dashboard/assignments", label: "Assignments", icon: "📝" },
+    { to: "/dashboard/students", label: "Students", icon: "👥" },
+    { to: "/dashboard/reports", label: "Reports", icon: "📈" },
+  ];
+
+  const adminLinks = [
+    { to: "/dashboard/admin/overview", label: "Overview", icon: "🧭" },
+    { to: "/dashboard/admin/users", label: "Manage Users", icon: "👥" },
+    { to: "/dashboard/admin/reports", label: "Reports", icon: "📈" },
+    { to: "/dashboard/admin/settings", label: "Settings", icon: "⚙️" },
+  ];
+
+  const normalizeRole = (value) => String(value || "").toUpperCase().replace(/^ROLE_/, "");
+  const normalizedRole = normalizeRole(Array.isArray(roles) ? roles[0] : roles);
+
+  const isTeacher = normalizedRole === "TEACHER";
+  const roleLinks = isTeacher ? teacherLinks : studentLinks;
+  const roleLabel = isTeacher ? "Teacher" : "Student";
+  const sidebarClass = isAdminArea
+    ? "admin-sidebar"
+    : isTeacher
+    ? "teacher-sidebar"
+    : "student-sidebar";
+
+  const sidebarSections = isAdminArea
+    ? [{ title: "Admin Menu", items: adminLinks }]
+    : [{ title: "Student Menu", items: roleLinks }];
+
   return (
     <div className="dashboard-container">
-      <aside className="dashboard-sidebar">
+      <aside className={`dashboard-sidebar ${sidebarClass}`}>
         <div className="sidebar-header">
-          <h2>Navigation</h2>
+          <h2>{isAdminArea ? "Admin Panel" : `${roleLabel} Navigation`}</h2>
+          {!isAdminArea && <p className="sidebar-subtitle">Quick access for {roleLabel.toLowerCase()} workflows.</p>}
         </div>
         <nav className="sidebar-nav">
-          <ul>
-            <li className="nav-item active">
-              <span className="nav-icon">🏠</span>
-              <span className="nav-label">Dashboard</span>
-            </li>
-            <li className="nav-item">
-              <span className="nav-icon">📚</span>
-              <span className="nav-label">Courses</span>
-            </li>
-            <li className="nav-item">
-              <span className="nav-icon">📝</span>
-              <span className="nav-label">Assignments</span>
-            </li>
-            <li className="nav-item">
-              <span className="nav-icon">📊</span>
-              <span className="nav-label">Grades</span>
-            </li>
-          </ul>
+          {sidebarSections.map((section) => (
+            <div key={section.title} className="nav-group">
+              {!isAdminArea && <div className="nav-group-title">{section.title}</div>}
+              <ul>
+                {section.items.map((link) => (
+                  <li key={link.to}>
+                    <NavLink
+                      to={link.to}
+                      className={({ isActive }) =>
+                        isActive ? "nav-item active" : "nav-item"
+                      }
+                    >
+                      <span className="nav-icon">{link.icon}</span>
+                      <span className="nav-label">{link.label}</span>
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </nav>
       </aside>
 
       <main className="dashboard-main">
         <header className="dashboard-header">
-          <h1>Welcome to the Dashboard</h1>
-          <button onClick={handleLogout} className="logout-button">
-            Logout
-          </button>
+          <h1>
+            {isAdminArea
+              ? "Admin Dashboard"
+              : `${roleLabel} Dashboard`}
+          </h1>
+
         </header>
 
         <div className="dashboard-content">
-          <div className="user-info">
-            <h2>User Information</h2>
-            <div className="info-item">
-              <strong>Full Name:</strong> {fullName || "Not provided"}
-            </div>
-            <div className="info-item">
-              <strong>User ID:</strong> {userId || "Not available"}
-            </div>
-            <div className="info-item">
-              <strong>Roles:</strong>
-              {roles && roles.length > 0 ? (
-                <ul>
-                  {roles.map((role, index) => (
-                    <li key={index}>{role}</li>
-                  ))}
-                </ul>
-              ) : (
-                <span>No roles assigned</span>
-              )}
-            </div>
-          </div>
+          {isAdminArea && (
+            <section className="admin-summary">
+              <h2>Admin section: {currentAdminSection}</h2>
+              <p>
+                Use the left navigation links to explore admin pages like overview,
+                users, reports and settings.
+              </p>
+            </section>
+          )}
 
-          <div className="profile-section">
-            <h2>Profile Details</h2>
-            {profileLoading && <p>Loading profile...</p>}
-            {profileError && (
-              <p className="error-message">Error: {profileError}</p>
-            )}
-            {profileData && (
-              <div className="profile-data">
-                <pre>{JSON.stringify(profileData, null, 2)}</pre>
-              </div>
-            )}
-          </div>
-
-          <div className="dashboard-actions">
-            <h3>Quick Actions</h3>
-            <div className="action-buttons">
-              <button onClick={() => navigate("/profile")}>View Profile</button>
-              <button onClick={() => navigate("/settings")}>Settings</button>
-            </div>
-          </div>
-
-          <div className="scroll-test-content">
+          
+            <div className="scroll-test-content">
             <h3>Recent Activity</h3>
-            <div className="activity-list">
-              {Array.from({ length: 20 }, (_, i) => (
-                <div key={i} className="activity-item">
-                  <span className="activity-icon">📄</span>
-                  <div className="activity-details">
-                    <p>Activity {i + 1}</p>
-                    <small>2 hours ago</small>
-                  </div>
-                </div>
-              ))}
-            </div>
+            
           </div>
         </div>
       </main>
