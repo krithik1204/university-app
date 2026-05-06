@@ -15,7 +15,7 @@ export const Dashboard = () => {
   const isAdminArea = location.pathname.startsWith("/dashboard/admin");
   const currentAdminSection = location.pathname.replace("/dashboard/admin/", "") || "overview";
 
-  const { fullName, roles, isAuthenticated } = useSelector(
+  const { name, roles, isAuthenticated } = useSelector(
     (state) => state.auth
   );
 
@@ -142,7 +142,7 @@ export const Dashboard = () => {
                 </h1>
               </div>
               <div className="dashboard-main-user">
-                {fullName || "User"}
+                {name || "User"}
               </div>
             </div>
           </header>

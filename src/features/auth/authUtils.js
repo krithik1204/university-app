@@ -8,7 +8,7 @@
  */
 const STORAGE_KEYS = {
   ACCESS_TOKEN: 'accessToken',
-  FULL_NAME: 'fullName',
+  NAME: 'name',
   ROLES: 'roles',
   USER_ID: 'userId',
   REFRESH_TOKEN: 'refreshToken'
@@ -37,7 +37,7 @@ const safeJsonParse = (key, defaultValue = null) => {
  */
 export const getStoredAuthData = () => ({
   accessToken: sessionStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN),
-  fullName: sessionStorage.getItem(STORAGE_KEYS.FULL_NAME) || '',
+  name: sessionStorage.getItem(STORAGE_KEYS.NAME) || '',
   roles: safeJsonParse(STORAGE_KEYS.ROLES, []),
   userId: sessionStorage.getItem(STORAGE_KEYS.USER_ID) || null,
   refreshToken: sessionStorage.getItem(STORAGE_KEYS.REFRESH_TOKEN)
@@ -47,14 +47,14 @@ export const getStoredAuthData = () => ({
  * Stores authentication data in sessionStorage
  * @param {Object} authData - Authentication data to store
  * @param {string} authData.accessToken - Access token
- * @param {string} authData.fullName - User's full name
+ * @param {string} authData.name - User's name
  * @param {Array} authData.roles - User's roles
  * @param {string} authData.userId - User ID
  * @param {string} [authData.refreshToken] - Refresh token (optional)
  */
-export const storeAuthData = ({ accessToken, fullName, roles, userId, refreshToken }) => {
+export const storeAuthData = ({ accessToken, name, roles, userId, refreshToken }) => {
   sessionStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, accessToken);
-  sessionStorage.setItem(STORAGE_KEYS.FULL_NAME, fullName);
+  sessionStorage.setItem(STORAGE_KEYS.NAME, name);
   sessionStorage.setItem(STORAGE_KEYS.ROLES, JSON.stringify(roles));
   sessionStorage.setItem(STORAGE_KEYS.USER_ID, userId || '');
 

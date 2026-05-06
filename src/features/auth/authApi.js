@@ -53,8 +53,7 @@ export const loginUser = async (email, password) => {
  * @param {Object} userData - User registration data
  * @param {string} userData.email - User's email
  * @param {string} userData.password - User's password
- * @param {string} userData.firstName - User's first name
- * @param {string} userData.lastName - User's last name
+ * @param {string} userData.name - User's name
  * @returns {Promise<Object>} Registration response data
  * @throws {Error} If registration fails
  */
@@ -90,9 +89,8 @@ export const parseAuthResponse = (responseData) => {
     throw new Error('Invalid authentication response');
   }
 
-  const userFirstName = user.firstName || '';
-  const userLastName = user.lastName || '';
-  const fullName = `${userFirstName} ${userLastName}`.trim();
+  const name = user.name || '';
+ 
   const userId = user.id ? String(user.id) : null;
   const rawRoles = user.roles ?? user.role ?? [];
   const rolesArray = Array.isArray(rawRoles) ? rawRoles : rawRoles ? [rawRoles] : [];
@@ -102,7 +100,7 @@ export const parseAuthResponse = (responseData) => {
     accessToken,
     refreshToken: refreshToken || null,
     userId,
-    fullName,
+    name,
     roles: normalizedRoles
   };
 };

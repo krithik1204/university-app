@@ -7,6 +7,8 @@ import { RoleBasedProtectedRoute } from "./RoleBasedProtectedRoute";
 import { DashboardShell } from "../features/common/DashboardShell";
 import { StudentDashboard } from "../features/student/StudentDashboard";
 import { TeacherDashboard } from "../features/teacher/TeacherDashboard";
+import { AdminDashboard } from "../features/admin/AdminDashboard";
+import { AdminManagement } from "../features/admin/AdminManagement";
 
 const normalizeRole = (role) =>
   String(role || "").toUpperCase().replace(/^ROLE_/, "");
@@ -24,6 +26,8 @@ export const AppRoutes = () => {
     ? "student"
     : normalizedRoles.includes("TEACHER")
     ? "teacher"
+    : normalizedRoles.includes("ADMIN")
+    ? "admin-dashboard"
     : "student";
 
   const defaultDashboard = `/dashboard/${defaultSubRoute}`;
@@ -94,6 +98,26 @@ export const AppRoutes = () => {
           element={
             <RoleBasedProtectedRoute allowedRoles={["ROLE_TEACHER"]}>
               <TeacherDashboard />
+            </RoleBasedProtectedRoute>
+          }
+        />
+
+        {/* Admin Dashboard */}
+        <Route
+          path="admin-dashboard"
+          element={
+            <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
+              <AdminDashboard />
+            </RoleBasedProtectedRoute>
+          }
+        />
+
+        {/* Admin Management */}
+        <Route
+          path="admin-management"
+          element={
+            <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
+              <AdminManagement />
             </RoleBasedProtectedRoute>
           }
         />

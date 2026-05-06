@@ -13,7 +13,7 @@ const normalizeRole = (role) => String(role || '').toUpperCase().replace(/^ROLE_
 export const AuthNavigation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAuthenticated, fullName, roles } = useSelector(state => state.auth);
+  const { isAuthenticated, name, roles } = useSelector(state => state.auth);
 
   const normalizedRoles = Array.isArray(roles)
     ? roles.map(normalizeRole).filter(Boolean)
@@ -30,7 +30,7 @@ export const AuthNavigation = () => {
       {isAuthenticated ? (
         <>
           <span className="auth-welcome">
-            Welcome, <strong>{fullName || 'User'}</strong>
+            Welcome, <strong>{name || 'User'}</strong>
           </span>
           <span className="auth-role">
             {roleText}

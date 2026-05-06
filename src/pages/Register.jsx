@@ -6,12 +6,12 @@ export const Register = () => {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
+    dateOfBirth: "",
     email: "",
     phoneNumber: "",
     password: "",
-    confirmPassword: "",
+    
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -20,8 +20,8 @@ export const Register = () => {
 
   const validateForm = () => {
     if (
-      !form.firstName ||
-      !form.lastName ||
+      !form.name ||
+      
       !form.email ||
       !form.phoneNumber ||
       !form.password ||
@@ -34,10 +34,6 @@ export const Register = () => {
       return "Passwords do not match";
     }
 
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/;
-    if (!passwordRegex.test(form.password)) {
-      return "Password must contain at least one letter and one number";
-    }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(form.email)) {
@@ -66,11 +62,11 @@ export const Register = () => {
       }
 
       await registerUser({
-        firstName: form.firstName,
-        lastName: form.lastName,
+        name: form.name,
         email: form.email,
         phoneNumber: form.phoneNumber,
         password: form.password,
+        dateOfBirth: form.dateOfBirth
       });
 
       setSuccess(true);
@@ -138,13 +134,13 @@ export const Register = () => {
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-5">
           <div className="grid gap-4 sm:grid-cols-2">
-            <label className="space-y-2 text-sm font-semibold text-slate-700" htmlFor="firstName">
-              <span>First Name</span>
+            <label className="space-y-2 text-sm font-semibold text-slate-700" htmlFor="name">
+              <span>Name</span>
               <input
                 type="text"
-                name="firstName"
-                id="firstName"
-                value={form.firstName}
+                name="name"
+                id="name"
+                value={form.name}
                 onChange={handleInputChange}
                 disabled={isLoading}
                 required
@@ -152,16 +148,17 @@ export const Register = () => {
                 className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 transition focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-200"
               />
             </label>
-            <label className="space-y-2 text-sm font-semibold text-slate-700" htmlFor="lastName">
-              <span>Last Name</span>
+            <label className="space-y-2 text-sm font-semibold text-slate-700" htmlFor="dateOfBirth">
+              <span>Date Of Birth</span>
               <input
-                type="text"
-                name="lastName"
-                id="lastName"
-                value={form.lastName}
+                type="date"
+                name="dateOfBirth"
+                id="dateOfBirth"
+                value={form.dateOfBirth}
                 onChange={handleInputChange}
                 disabled={isLoading}
                 required
+                autoFocus
                 className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 transition focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-200"
               />
             </label>

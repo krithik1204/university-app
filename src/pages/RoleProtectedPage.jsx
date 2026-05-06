@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 
 export const RoleProtectedPage = () => {
-  const { fullName, roles } = useSelector((state) => state.auth);
+  const { name, roles } = useSelector((state) => state.auth);
   const roleText = Array.isArray(roles) ? roles.join(", ") : roles || "None";
 
   return (
@@ -9,7 +9,7 @@ export const RoleProtectedPage = () => {
       <h1 className="text-3xl font-semibold text-slate-900">Role-based Protected Route</h1>
       <p>This page is only accessible to users with allowed roles.</p>
       <p>
-        Welcome, <strong>{fullName || "User"}</strong>. Your roles are:
+        Welcome, <strong>{name || "User"}</strong>. Your roles are:
         <strong> {roleText}</strong>
       </p>
     </section>

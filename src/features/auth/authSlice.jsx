@@ -11,7 +11,7 @@ const storedAuthData = getStoredAuthData();
 
 const initialState = {
   isAuthenticated: Boolean(storedAuthData.accessToken),
-  fullName: storedAuthData.fullName,
+  name: storedAuthData.name,
   roles: storedAuthData.roles,
   accessToken: storedAuthData.accessToken,
   refreshToken: storedAuthData.refreshToken,
@@ -32,18 +32,18 @@ const AuthSlice = createSlice({
      * @param {Object} action - Action payload containing user authentication data
      */
     login: (state, action) => {
-      const { fullName, roles, accessToken, refreshToken, userId } = action.payload;
+      const { name, roles, accessToken, refreshToken, userId } = action.payload;
 
       // Update state
       state.isAuthenticated = true;
-      state.fullName = fullName;
+      state.name = name;
       state.roles = roles;
       state.accessToken = accessToken;
       state.refreshToken = refreshToken ?? null;
       state.userId = userId;
 
       // Persist to sessionStorage
-      storeAuthData({ accessToken, fullName, roles, userId, refreshToken });
+      storeAuthData({ accessToken, name, roles, userId, refreshToken });
     },
 
     /**
@@ -53,7 +53,7 @@ const AuthSlice = createSlice({
     logout: (state) => {
       // Reset state to initial values
       state.isAuthenticated = false;
-      state.fullName = '';
+      state.name = '';
       state.roles = [];
       state.accessToken = null;
       state.refreshToken = null;

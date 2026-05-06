@@ -6,16 +6,21 @@ const normalizeRole = (role) => String(role || "").toUpperCase().replace(/^ROLE_
 
 export const DashboardShell = ({ children }) => {
   const location = useLocation();
-  const { fullName, roles } = useSelector((state) => state.auth);
+  const { name, roles } = useSelector((state) => state.auth);
   const normalizedRoles = Array.isArray(roles) ? roles.map(normalizeRole) : [normalizeRole(roles)];
   const availableRoles = new Set(normalizedRoles.filter(Boolean));
   const currentSection = location.pathname.split("/").pop();
-  const selectedRole = currentSection === "teacher" ? "TEACHER" : "STUDENT";
+  
+  const selectedRole = currentSection
+  ? currentSection.toUpperCase()
+  : normalizedRoles[0] || "";
   const currentSectionAuthorized =
     currentSection === "teacher"
       ? availableRoles.has("TEACHER")
       : currentSection === "student"
       ? availableRoles.has("STUDENT")
+      : (currentSection === "admin-dashboard" || currentSection === "admin-management")
+      ? availableRoles.has("ADMIN")
       : availableRoles.size > 0;
 
   const navLinks = [];
@@ -25,11 +30,19 @@ export const DashboardShell = ({ children }) => {
   if (availableRoles.has("TEACHER")) {
     navLinks.push({ to: "teacher", label: "Teacher", icon: "🏫" });
   }
+    if (availableRoles.has("ADMIN")) {
+    navLinks.push({ to: "admin-dashboard", label: "Admin Dashboard", icon: "⚙️" });
+    navLinks.push({ to: "admin-management", label: "Admin Management", icon: "🔧" });
+  }
 
   const roleLabel = currentSectionAuthorized
-    ? selectedRole === "TEACHER"
+    ? currentSection === "teacher"
       ? "Teacher"
-      : "Student"
+      : currentSection === "student"
+      ? "Student"
+      : (currentSection === "admin-dashboard" || currentSection === "admin-management")
+      ? "Admin"
+      : "Dashboard"
     : "Dashboard";
 
   return (

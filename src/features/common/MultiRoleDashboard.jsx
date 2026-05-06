@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export const MultiRoleDashboard = () => {
-  const { fullName, roles } = useSelector((state) => state.auth);
+  const { name, roles } = useSelector((state) => state.auth);
 
   const normalizeRole = (role) => String(role || "").toUpperCase().replace(/^ROLE_/, "");
   const normalizedRoles = Array.isArray(roles) ? roles.map(normalizeRole) : [normalizeRole(roles)];
@@ -18,7 +18,7 @@ export const MultiRoleDashboard = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-sky-100 to-slate-200 px-4 py-12">
       <header className="mx-auto max-w-4xl text-center">
-        <h1 className="text-4xl font-semibold text-slate-900">Welcome, {fullName || "User"}</h1>
+        <h1 className="text-4xl font-semibold text-slate-900">Welcome, {name || "User"}</h1>
         <p className="mt-4 text-base leading-7 text-slate-600">You have multiple roles. Select which dashboard to access:</p>
       </header>
 
