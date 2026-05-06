@@ -20,11 +20,11 @@ export const RoleBasedProtectedRoute = ({ children, allowedRoles = [] }) => {
 
   if (!hasRequiredRole) {
     return (
-      <section className="unauthorized-page">
-        <div className="unauthorized-card">
-          <h1>Access Denied</h1>
-          <p>You don&apos;t have authorization to access any functionality.</p>
-          <p>If you believe this is a mistake, please contact your administrator.</p>
+      <section className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-slate-100 px-4 py-20">
+        <div className="w-full max-w-xl rounded-[1.75rem] border border-slate-200 bg-white p-8 shadow-xl">
+          <h1 className="text-3xl font-semibold text-slate-900">Access Denied</h1>
+          <p className="mt-4 text-slate-600">You don&apos;t have authorization to access any functionality.</p>
+          <p className="mt-4 text-slate-600">If you believe this is a mistake, please contact your administrator.</p>
         </div>
       </section>
     );

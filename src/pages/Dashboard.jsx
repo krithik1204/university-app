@@ -3,8 +3,7 @@ import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { logout } from "../features/auth/authSlice";
 import { getUserProfile } from "../features/profile/profileApi";
-import "./styles/Dashboard.css";
-
+import './Dashboard.css';
 /**
  * Dashboard component - main authenticated user interface
  * Displays user information and provides logout functionality
@@ -16,7 +15,7 @@ export const Dashboard = () => {
   const isAdminArea = location.pathname.startsWith("/dashboard/admin");
   const currentAdminSection = location.pathname.replace("/dashboard/admin/", "") || "overview";
 
-  const { fullName, roles, userId, isAuthenticated } = useSelector(
+  const { fullName, roles, isAuthenticated } = useSelector(
     (state) => state.auth
   );
 
@@ -84,11 +83,11 @@ export const Dashboard = () => {
   const isTeacher = normalizedRole === "TEACHER";
   const roleLinks = isTeacher ? teacherLinks : studentLinks;
   const roleLabel = isTeacher ? "Teacher" : "Student";
-  const sidebarClass = isAdminArea
-    ? "admin-sidebar"
+  const sidebarHighlight = isAdminArea
+    ? "from-emerald-500 to-slate-900"
     : isTeacher
-    ? "teacher-sidebar"
-    : "student-sidebar";
+    ? "from-sky-500 to-slate-900"
+    : "from-indigo-500 to-slate-900";
 
   const sidebarSections = isAdminArea
     ? [{ title: "Admin Menu", items: adminLinks }]
@@ -96,63 +95,79 @@ export const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <aside className={`dashboard-sidebar ${sidebarClass}`}>
-        <div className="sidebar-header">
-          <h2>{isAdminArea ? "Admin Panel" : `${roleLabel} Navigation`}</h2>
-          {!isAdminArea && <p className="sidebar-subtitle">Quick access for {roleLabel.toLowerCase()} workflows.</p>}
-        </div>
-        <nav className="sidebar-nav">
-          {sidebarSections.map((section) => (
-            <div key={section.title} className="nav-group">
-              {!isAdminArea && <div className="nav-group-title">{section.title}</div>}
-              <ul>
-                {section.items.map((link) => (
-                  <li key={link.to}>
-                    <NavLink
-                      to={link.to}
-                      className={({ isActive }) =>
-                        isActive ? "nav-item active" : "nav-item"
-                      }
-                    >
-                      <span className="nav-icon">{link.icon}</span>
-                      <span className="nav-label">{link.label}</span>
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </nav>
+      <div className="dashboard-grid">
+        <aside className="dashboard-sidebar h-screen">
+          <div className="dashboard-sidebar-header">
+            University App
+          </div>
+          <div className="dashboard-sidebar-quote-box">
+            <p className="dashboard-sidebar-quote-text">"Arise, awake, and stop not till the goal is reached."</p>
+            <p className="dashboard-sidebar-quote-author">— Swami Vivekananda</p>
+          </div>
+          <div className="dashboard-nav-header">
+            <h2 className="dashboard-nav-title">{isAdminArea ? "Admin Panel" : `${roleLabel} Navigation`}</h2>
+            {!isAdminArea && <p className="dashboard-nav-subtitle">Quick access for {roleLabel.toLowerCase()} workflows.</p>}
+          </div>
+          <nav className="dashboard-nav">
+            {sidebarSections.map((section) => (
+              <div key={section.title}>
+                {!isAdminArea && <div className="dashboard-nav-section-title">{section.title}</div>}
+                <ul className="dashboard-nav-list">
+                  {section.items.map((link) => (
+                    <li key={link.to}>
+                      <NavLink
+                        to={link.to}
+                        className={({ isActive }) =>
+                          isActive ? 'dashboard-nav-link dashboard-nav-link-active' : 'dashboard-nav-link dashboard-nav-link-inactive'
+                        }
+                      >
+                        <span className="dashboard-nav-icon">{link.icon}</span>
+                        <span>{link.label}</span>
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </nav>
       </aside>
 
-      <main className="dashboard-main">
-        <header className="dashboard-header">
-          <h1>
-            {isAdminArea
-              ? "Admin Dashboard"
-              : `${roleLabel} Dashboard`}
-          </h1>
+        <main className="dashboard-main">
+          <header className="dashboard-main-header">
+            <div className="dashboard-main-header-top">
+              <div>
+                <p className="dashboard-main-welcome">Welcome back</p>
+                <h1 className="dashboard-main-title">
+                  {isAdminArea ? "Admin Dashboard" : `${roleLabel} Dashboard`}
+                </h1>
+              </div>
+              <div className="dashboard-main-user">
+                {fullName || "User"}
+              </div>
+            </div>
+          </header>
 
-        </header>
+          <section className="dashboard-main-content">
+            {isAdminArea ? (
+              <div className="dashboard-card">
+                <h2 className="dashboard-card-title">Admin section: {currentAdminSection}</h2>
+                <p className="dashboard-card-text">
+                  Use the left navigation links to explore admin pages like overview, users, reports and settings.
+                </p>
+              </div>
+            ) : (
+              <div className="dashboard-card">
+                <h2 className="dashboard-card-title">Welcome back, {roleLabel}</h2>
+                <p className="dashboard-card-text">Your dashboard gives you quick access to assignments, schedules, and progress tracking.</p>
+              </div>
+            )}
 
-        <div className="dashboard-content">
-          {isAdminArea && (
-            <section className="admin-summary">
-              <h2>Admin section: {currentAdminSection}</h2>
-              <p>
-                Use the left navigation links to explore admin pages like overview,
-                users, reports and settings.
-              </p>
-            </section>
-          )}
-
-          
-            <div className="scroll-test-content">
-            <h3>Recent Activity</h3>
-            
-          </div>
-        </div>
-      </main>
+            <div className="dashboard-card">
+              <h3 className="dashboard-card-title">Recent Activity</h3>
+              <p className="dashboard-card-text">No activity yet. Start by selecting a section from the sidebar above.</p>
+            </div>
+          </section>
+        </main>
     </div>
   );
 };

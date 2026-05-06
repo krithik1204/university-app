@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../features/auth/authSlice';
-import './styles/AuthNavigation.css';
+import './AuthNavigation.css';
 
 const normalizeRole = (role) => String(role || '').toUpperCase().replace(/^ROLE_/, '');
 
@@ -26,17 +26,19 @@ export const AuthNavigation = () => {
   };
 
   return (
-    <nav className="auth-nav flex items-center gap-4">
+    <nav className="auth-nav">
       {isAuthenticated ? (
         <>
-          <span className="auth-welcome text-sm text-slate-200">
+          <span className="auth-welcome">
             Welcome, <strong>{fullName || 'User'}</strong>
           </span>
-          <span className="auth-role-badge">{roleText}</span>
+          <span className="auth-role">
+            {roleText}
+          </span>
           <button
             type="button"
             onClick={handleLogout}
-            className="rounded-md bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-amber-400"
+            className="auth-logout"
           >
             Logout
           </button>
@@ -47,7 +49,7 @@ export const AuthNavigation = () => {
             to="/login"
             end
             className={({ isActive }) =>
-              `rounded-full px-4 py-2 text-sm font-semibold transition ${isActive ? 'bg-white text-slate-900 shadow-lg' : 'text-slate-100 hover:text-white hover:bg-slate-700/70'}`
+              isActive ? 'auth-link auth-link-active' : 'auth-link auth-link-inactive'
             }
           >
             Login
@@ -56,7 +58,7 @@ export const AuthNavigation = () => {
             to="/register"
             end
             className={({ isActive }) =>
-              `rounded-full px-4 py-2 text-sm font-semibold transition ${isActive ? 'bg-white text-slate-900 shadow-lg' : 'text-slate-100 hover:text-white hover:bg-slate-700/70'}`
+              isActive ? 'auth-link auth-link-active' : 'auth-link auth-link-inactive'
             }
           >
             Register

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AuthNavigation } from './AuthNavigation';
-import './styles/Header.css';
+import './Header.css';
 
 const quotes = [
   {
@@ -46,19 +46,21 @@ const Header = () => {
   }, [isAuthenticated]);
 
   return (
-    <header className="app-header">
-      <div className="app-header-top">
-        <div>
-          <p className="eyebrow">University App</p>
+    <header className="header">
+      <div className="header-container">
+        <div className="header-content">
+          <p className="header-title">University App</p>
           {isAuthenticated ? (
-            <div className="header-quote">
-              <p className="quote-text">“{quote.text}”</p>
-              <p className="quote-author">— {quote.author}</p>
+            <div className="header-quote-box">
+              <p className="header-quote-text">"{quote.text}"</p>
+              <p className="header-quote-author">— {quote.author}</p>
             </div>
           ) : (
             <>
-              <h1 className="heading">Learn, Connect & Grow</h1>
-              <p className="subheading">A colorful student portal for login, registration, and personalized study dashboards.</p>
+              <h1 className="header-welcome-title">Learn, Connect & Grow</h1>
+              <p className="header-welcome-text">
+                A colorful student portal for login, registration, and personalized study dashboards.
+              </p>
             </>
           )}
         </div>
