@@ -1,0 +1,70 @@
+.header {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: linear-gradient(to bottom right, #0f172a, #1e293b, #0ea5e9);
+  padding: 0.5rem 1.5rem;
+  box-shadow: 0 24px 80px rgba(15,23,42,0.18);
+  backdrop-filter: blur(12px);
+  color: #f8fafc;
+}
+
+.header-container {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  max-width: 80rem;
+}
+
+.header-content {
+  max-width: 48rem;
+}
+
+.header-title {
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.875rem;
+  color: #7dd3fc;
+}
+
+.header-quote-box {
+  margin-top: 0.5rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  backdrop-filter: blur(12px);
+}
+
+.header-quote-text {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #f1f5f9;
+}
+
+.header-quote-author {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #38bdf8;
+}
+
+.header-welcome-title {
+  font-size: 2.25rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+}
+
+.header-welcome-text {
+  margin-top: 1rem;
+  max-width: 32rem;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #e2e8f0;
+}

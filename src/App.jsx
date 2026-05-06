@@ -8,14 +8,12 @@ import { AppRoutes } from './routes/AppRoutes';
  */
 function App() {
   return (
-    <div className="app-shell min-h-screen bg-slate-50 text-slate-900">
+    <div className="min-h-screen bg-slate-50 text-slate-900">
       <Header />
 
-      <main className="app-main">
+      <main className="flex-1 w-full">
         <AppRoutes />
       </main>
-
-     
     </div>
   );
 }
