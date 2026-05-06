@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
+import "./RoleBasedProtectedRoute.css";
 
 const normalizeRole = (role) => String(role || "").toUpperCase().replace(/^ROLE_/, "");
 
@@ -20,11 +21,11 @@ export const RoleBasedProtectedRoute = ({ children, allowedRoles = [] }) => {
 
   if (!hasRequiredRole) {
     return (
-      <section className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-slate-100 px-4 py-20">
-        <div className="w-full max-w-xl rounded-[1.75rem] border border-slate-200 bg-white p-8 shadow-xl">
-          <h1 className="text-3xl font-semibold text-slate-900">Access Denied</h1>
-          <p className="mt-4 text-slate-600">You don&apos;t have authorization to access any functionality.</p>
-          <p className="mt-4 text-slate-600">If you believe this is a mistake, please contact your administrator.</p>
+      <section className="access-denied-section">
+        <div className="access-denied-card">
+          <h1 className="access-denied-title">Access Denied</h1>
+          <p className="access-denied-text">You don&apos;t have authorization to access any functionality.</p>
+          <p className="access-denied-text">If you believe this is a mistake, please contact your administrator.</p>
         </div>
       </section>
     );

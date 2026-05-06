@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import "./MultiRoleDashboard.css";
 
 export const MultiRoleDashboard = () => {
   const { name, roles } = useSelector((state) => state.auth);
@@ -16,22 +17,22 @@ export const MultiRoleDashboard = () => {
   }).filter(Boolean);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-sky-100 to-slate-200 px-4 py-12">
-      <header className="mx-auto max-w-4xl text-center">
-        <h1 className="text-4xl font-semibold text-slate-900">Welcome, {name || "User"}</h1>
-        <p className="mt-4 text-base leading-7 text-slate-600">You have multiple roles. Select which dashboard to access:</p>
+    <div className="multi-role-dashboard">
+      <header className="multi-role-header">
+        <h1 className="multi-role-title">Welcome, {name || "User"}</h1>
+        <p className="multi-role-subtitle">You have multiple roles. Select which dashboard to access:</p>
       </header>
 
-      <div className="mx-auto mt-10 grid max-w-6xl gap-8 sm:grid-cols-2">
+      <div className="multi-role-grid">
         {roleOptions.map((option) => (
           <NavLink
             key={option.to}
             to={option.to}
-            className="group block rounded-[1.5rem] border border-slate-200 bg-white p-8 text-slate-900 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
+            className="multi-role-card"
           >
-            <div className="mb-6 text-5xl">{option.icon}</div>
-            <h3 className="text-2xl font-semibold">{option.label}</h3>
-            <p className="mt-3 text-sm leading-6 text-slate-600">{option.desc}</p>
+            <div className="multi-role-icon">{option.icon}</div>
+            <h3 className="multi-role-card-title">{option.label}</h3>
+            <p className="multi-role-card-desc">{option.desc}</p>
           </NavLink>
         ))}
       </div>

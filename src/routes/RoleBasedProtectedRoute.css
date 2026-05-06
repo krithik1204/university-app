@@ -1,0 +1,29 @@
+.access-denied-section {
+  min-height: calc(100vh - 4rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f5f9;
+  padding: 5rem 1rem;
+}
+
+.access-denied-card {
+  width: 100%;
+  max-width: 36rem;
+  border-radius: 1.75rem;
+  border: 1px solid #e2e8f0;
+  background-color: white;
+  padding: 2rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.access-denied-title {
+  font-size: 1.875rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.access-denied-text {
+  margin-top: 1rem;
+  color: #475569;
+}

@@ -1,6 +1,6 @@
 import Header from './components/Header';
-
 import { AppRoutes } from './routes/AppRoutes';
+import './App.css';
 
 /**
  * Main App component
@@ -8,10 +8,10 @@ import { AppRoutes } from './routes/AppRoutes';
  */
 function App() {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
+    <div className="app">
       <Header />
 
-      <main className="flex-1 w-full">
+      <main className="app-main">
         <AppRoutes />
       </main>
     </div>

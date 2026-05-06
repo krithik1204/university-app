@@ -1,0 +1,17 @@
+.admin-dashboard-section {
+  border-radius: 1.5rem;
+  background-color: white;
+  padding: 2rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.admin-dashboard-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.admin-dashboard-text {
+  margin: 0;
+}
