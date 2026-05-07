@@ -1,5 +1,5 @@
 import "./AdminDashboard.css";
-import { getUserData, updateUserRole } from "../resource/usersApi";
+import { getUserData, createUserRole } from "../resource/usersApi";
 import { getRolesData } from "../resource/rolesApi";
 import { useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
@@ -72,6 +72,9 @@ export const AdminDashboard = () => {
    * Updates a user's role
    */
   const handleRoleUpdate = useCallback(async (userId, roleId) => {
+
+    
+
     if (!userId || !roleId || !accessToken) {
       setErrors(prev => ({
         ...prev,
@@ -90,8 +93,8 @@ export const AdminDashboard = () => {
     }));
 
     try {
-      await updateUserRole(accessToken, userId, roleId);
-
+      await createUserRole(accessToken, userId, roleId);
+           
       // Clear success message after 3 seconds
       setTimeout(() => {
         setLoadingStates(prev => ({

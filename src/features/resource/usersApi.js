@@ -66,6 +66,7 @@ export const updateUser = async (token, userId, userData) => {
  * @throws {Error} If role update fails
  */
 export const updateUserRole = async (token, userId, role) => {
+  alert('Role is'+role + ' for user ' + userId);
   try {
     setAuthToken(usersApi, token);
     return executeApiCall(
@@ -74,6 +75,21 @@ export const updateUserRole = async (token, userId, role) => {
     );
   } catch (error) {
     console.error("Error updating user role:", error);
+    throw error; // Re-throw the formatted error from baseApi
+  }
+};
+
+export const createUserRole = async (token, userId, id) => {
+ alert('Role is'+id + ' for user ' + userId);
+
+  try {
+    setAuthToken(usersApi, token);
+    return executeApiCall(
+      () => usersApi.post(`/users/${userId}/role`, { roleId:Number(id) }),
+      'create user role'
+    );
+  } catch (error) {
+    console.error("Error creating user role:", error);
     throw error; // Re-throw the formatted error from baseApi
   }
 };
