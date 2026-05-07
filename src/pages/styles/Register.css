@@ -200,6 +200,18 @@
   color: #0f172a;
 }
 
+.register-grid {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  .register-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .register-form {
   margin-top: 2rem;
 }

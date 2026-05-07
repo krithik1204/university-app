@@ -134,7 +134,7 @@ export const Register = () => {
         <h2 className="register-title">Register</h2>
 
         <form onSubmit={handleSubmit} className="register-form">
-          <div className="grid">
+          <div className="register-grid">
             <label className="register-label" htmlFor="name">
               <span>Name</span>
               <input
@@ -194,7 +194,7 @@ export const Register = () => {
             />
           </label>
 
-          <div className="grid">
+          <div className="register-grid">
             <label className="register-label" htmlFor="password">
               <span>Password</span>
               <input

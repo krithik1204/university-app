@@ -525,33 +525,33 @@ export const StudentDashboard = () => {
                 const isExpanded = expandedRows.includes(user.id);
                 return (
                   <Fragment key={user.id}>
-                    <tr className="hover:bg-gray-50" onClick={() => activeView === "modify" && handleEditUser(user)}>
-                      <td className="border border-gray-300 px-4 py-2 text-center">
+                    <tr className="table-row" onClick={() => activeView === "modify" && handleEditUser(user)}>
+                      <td className="table-cell action-cell">
                         <button
                           type="button"
                           onClick={(e) => {
                             e.stopPropagation();
                             handleToggleRow(user.id);
                           }}
-                          className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-300 bg-slate-50 text-base font-bold text-slate-700 hover:bg-slate-100"
+                          className="expand-button"
                         >
                           {isExpanded ? "-" : "+"}
                         </button>
                       </td>
                       {visibleColumns.map((column) => (
-                        <td key={column.key} className="border border-gray-300 px-4 py-2">
+                        <td key={column.key} className="table-cell">
                           {user[column.key]}
                         </td>
                       ))}
                       {activeView === "delete" && (
-                        <td className="border border-gray-300 px-4 py-2 text-center">
+                        <td className="table-cell action-cell">
                           <button
                             type="button"
                             onClick={(e) => {
                               e.stopPropagation();
                               handleDeleteUser(user.id);
                             }}
-                            className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 text-sm"
+                            className="delete-button"
                           >
                             Delete
                           </button>
@@ -559,10 +559,10 @@ export const StudentDashboard = () => {
                       )}
                     </tr>
                     {isExpanded && (
-                      <tr className="bg-slate-50">
-                        <td className="border border-gray-300 px-4 py-2" />
-                        <td className="border border-gray-300 px-4 py-2" colSpan={visibleColumns.length + (activeView === "delete" ? 1 : 0)}>
-                          <div className="grid gap-4 md:grid-cols-3">
+                      <tr className="expanded-row">
+                        <td className="table-cell" />
+                        <td className="table-cell" colSpan={visibleColumns.length + (activeView === "delete" ? 1 : 0)}>
+                          <div className="expanded-content">
                             {hiddenColumns.map((column) => {
                               const isActiveSort = sortConfig.key === column.key;
                               const directionArrow = sortableColumns.includes(column.key)
@@ -575,16 +575,16 @@ export const StudentDashboard = () => {
                                   : ""
                                 : "";
                               return (
-                                <div key={column.key} className="rounded-lg bg-white p-3 shadow-sm border border-gray-200">
+                                <div key={column.key} className="expanded-card">
                                   <button
                                     type="button"
                                     onClick={() => handleSort(column.key)}
-                                    className="text-xs uppercase tracking-wide text-slate-500 hover:text-slate-700"
+                                    className="expanded-card-label"
                                   >
                                     {column.label}
-                                    <span className="ml-1 text-[10px]">{directionArrow}</span>
+                                    <span className="sort-arrow">{directionArrow}</span>
                                   </button>
-                                  <div className="mt-2 text-sm font-medium text-slate-900">{user[column.key]}</div>
+                                  <div className="expanded-card-value">{user[column.key]}</div>
                                 </div>
                               );
                             })}

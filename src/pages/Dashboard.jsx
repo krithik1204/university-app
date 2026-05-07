@@ -83,11 +83,6 @@ export const Dashboard = () => {
   const isTeacher = normalizedRole === "TEACHER";
   const roleLinks = isTeacher ? teacherLinks : studentLinks;
   const roleLabel = isTeacher ? "Teacher" : "Student";
-  const sidebarHighlight = isAdminArea
-    ? "from-emerald-500 to-slate-900"
-    : isTeacher
-    ? "from-sky-500 to-slate-900"
-    : "from-indigo-500 to-slate-900";
 
   const sidebarSections = isAdminArea
     ? [{ title: "Admin Menu", items: adminLinks }]
@@ -96,7 +91,7 @@ export const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <div className="dashboard-grid">
-        <aside className="dashboard-sidebar h-screen">
+          <aside className="dashboard-sidebar">
           <div className="dashboard-sidebar-header">
             University App
           </div>
@@ -167,7 +162,6 @@ export const Dashboard = () => {
               <p className="dashboard-card-text">No activity yet. Start by selecting a section from the sidebar above.</p>
             </div>
           </section>
-        </main>
-    </div>
+        </main>      </div>    </div>
   );
 };

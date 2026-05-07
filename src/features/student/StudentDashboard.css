@@ -220,12 +220,35 @@
   color: #0f172a;
 }
 
-.table-header-cell.action-col {
+.table-header-cell.action-col,
+.table-cell.action-cell {
   text-align: center;
 }
 
 .table-cell {
   color: #374151;
+}
+
+.table-row:hover {
+  background-color: #f8fafc;
+}
+
+.delete-button {
+  padding: 0.5rem 0.75rem;
+  background-color: #dc2626;
+  color: #ffffff;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.delete-button:hover {
+  background-color: #b91c1c;
+}
+
+.sort-arrow {
+  margin-left: 0.25rem;
 }
 
 .table-row:hover {
