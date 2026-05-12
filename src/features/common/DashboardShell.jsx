@@ -31,27 +31,27 @@ export const DashboardShell = ({ children }) => {
 
   const adminRoutes = [
     "admin-dashboard",
-    "admin-user-role",
-    "admin-faculty",
-    "admin-add-faculty",
-    "admin-update-faculty",
-    "admin-create-role",
-    "admin-assign-role",
+    "admin-role-management",
+    "admin-role-create",
+    "admin-role-assign",
+    "admin-faculty-management",
+    "admin-faculty-create",
+    "admin-faculty-update",
   ];
 
   const isAdminRoute =
     adminRoutes.includes(currentSection);
 
   const isUserRolePage = [
-    "admin-user-role",
-    "admin-create-role",
-    "admin-assign-role",
+    "admin-role-management",
+    "admin-role-create",
+    "admin-role-assign",
   ].includes(currentSection);
 
   const isFacultyPage = [
-    "admin-faculty",
-    "admin-add-faculty",
-    "admin-update-faculty",
+    "admin-faculty-management",
+    "admin-faculty-create",
+    "admin-faculty-update",
   ].includes(currentSection);
 
   let roleLabel = "Dashboard";
@@ -96,7 +96,7 @@ export const DashboardShell = ({ children }) => {
             <ul>
               <li>
                 <NavLink
-                  to="admin-user-role"
+                  to="admin-role-management"
                   className={navLinkClass}
                 >
                   <span className="dashboard-nav-icon">
@@ -109,7 +109,7 @@ export const DashboardShell = ({ children }) => {
 
               <li>
                 <NavLink
-                  to="admin-faculty"
+                  to="admin-faculty-management"
                   className={navLinkClass}
                 >
                   <span className="dashboard-nav-icon">
@@ -131,7 +131,7 @@ export const DashboardShell = ({ children }) => {
           isUserRolePage && (
             <div className="admin-quick-bar">
               <NavLink
-                to="admin-create-role"
+                to="admin-role-create"
                 className={({ isActive }) =>
                   isActive
                     ? "admin-quick-btn admin-quick-btn-active"
@@ -142,7 +142,7 @@ export const DashboardShell = ({ children }) => {
               </NavLink>
 
               <NavLink
-                to="admin-user-role"
+                to="admin-role-assign"
                 className={({ isActive }) =>
                   isActive
                     ? "admin-quick-btn admin-quick-btn-active"
@@ -159,7 +159,7 @@ export const DashboardShell = ({ children }) => {
           isFacultyPage && (
             <div className="admin-quick-bar">
               <NavLink
-                to="admin-add-faculty"
+                to="admin-faculty-create"
                 className={({ isActive }) =>
                   isActive
                     ? "admin-quick-btn admin-quick-btn-active"
@@ -170,7 +170,7 @@ export const DashboardShell = ({ children }) => {
               </NavLink>
 
               <NavLink
-                to="admin-update-faculty"
+                to="admin-faculty-update"
                 className={({ isActive }) =>
                   isActive
                     ? "admin-quick-btn admin-quick-btn-active"

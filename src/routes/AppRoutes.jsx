@@ -116,9 +116,9 @@ export const AppRoutes = () => {
           }
         />
 
-        {/* Admin User Role Management */}
+        {/* Admin Role Management */}
         <Route
-          path="admin-user-role"
+          path="admin-role-management"
           element={
             <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
               <AdminDashboard />
@@ -128,7 +128,7 @@ export const AppRoutes = () => {
 
         {/* Admin Faculty Management */}
         <Route
-          path="admin-faculty"
+          path="admin-faculty-management"
           element={
             <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
               <FacultyManagement />
@@ -136,9 +136,9 @@ export const AppRoutes = () => {
           }
         />
 
-        {/* Add Faculty */}
+        {/* Admin Faculty Create */}
         <Route
-          path="admin-add-faculty"
+          path="admin-faculty-create"
           element={
             <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
               <AddFaculty />
@@ -146,9 +146,9 @@ export const AppRoutes = () => {
           }
         />
 
-        {/* Update Faculty */}
+        {/* Admin Faculty Update */}
         <Route
-          path="admin-update-faculty"
+          path="admin-faculty-update"
           element={
             <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
               <UpdateFaculty />
@@ -156,9 +156,9 @@ export const AppRoutes = () => {
           }
         />
 
-        {/* Admin Create Role */}
+        {/* Admin Role Create */}
         <Route
-          path="admin-create-role"
+          path="admin-role-create"
           element={
             <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
               <CreateRole />
@@ -166,9 +166,9 @@ export const AppRoutes = () => {
           }
         />
 
-        {/* Admin Assign Role */}
+        {/* Admin Role Assign */}
         <Route
-          path="admin-assign-role"
+          path="admin-role-assign"
           element={
             <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
               <AssignRole />
