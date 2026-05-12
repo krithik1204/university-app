@@ -9,6 +9,7 @@ import { StudentDashboard } from "../features/student/StudentDashboard";
 import { TeacherDashboard } from "../features/teacher/TeacherDashboard";
 import { AdminDashboard } from "../features/admin/AdminDashboard";
 import { CreateRole } from "../features/admin/CreateRole";
+import { ViewRole } from "../features/admin/ViewRole";
 import { AssignRole } from "../features/admin/AssignRole";
 import { FacultyManagement } from "../features/admin/FacultyManagement";
 import { AddFaculty } from "../features/admin/AddFaculty";
@@ -162,6 +163,14 @@ export const AppRoutes = () => {
           element={
             <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
               <CreateRole />
+            </RoleBasedProtectedRoute>
+          }
+        />
+                <Route
+          path="admin-role-view"
+          element={
+            <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
+              <ViewRole />
             </RoleBasedProtectedRoute>
           }
         />

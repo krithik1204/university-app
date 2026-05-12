@@ -23,6 +23,7 @@ export const DashboardShell = ({ children }) => {
 
   const adminRoutes = [
     "admin-dashboard",
+    "admin-role-view",
     "admin-role-management",
     "admin-role-create",
     "admin-faculty-management",
@@ -36,6 +37,7 @@ export const DashboardShell = ({ children }) => {
   const isUserRolePage = [
     "admin-role-management",
     "admin-role-create",
+    "admin-role-view"
   ].includes(currentSection);
 
   const isFacultyPage = [
@@ -136,6 +138,16 @@ export const DashboardShell = ({ children }) => {
                 }
               >
                 <span>➕</span> Add Role
+              </NavLink>
+              <NavLink
+                to="admin-role-view"
+                className={({ isActive }) =>
+                  isActive
+                    ? "admin-quick-btn admin-quick-btn-active"
+                    : "admin-quick-btn"
+                }
+              >
+                <span>👁️</span> View Role
               </NavLink>
             </div>
           )}
