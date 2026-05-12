@@ -115,16 +115,7 @@ export const DashboardShell = ({ children }) => {
         {availableRoles.includes("ADMIN") &&
           isUserRolePage && (
             <div className="admin-quick-bar">
-              <NavLink
-                to="admin-role-create"
-                className={({ isActive }) =>
-                  isActive
-                    ? "admin-quick-btn admin-quick-btn-active"
-                    : "admin-quick-btn"
-                }
-              >
-                <span>➕</span> Add Role
-              </NavLink>
+
 
               <NavLink
                 to="admin-role-management"
@@ -135,6 +126,16 @@ export const DashboardShell = ({ children }) => {
                 }
               >
                 <span>👤</span> Assign Role
+              </NavLink>
+                            <NavLink
+                to="admin-role-create"
+                className={({ isActive }) =>
+                  isActive
+                    ? "admin-quick-btn admin-quick-btn-active"
+                    : "admin-quick-btn"
+                }
+              >
+                <span>➕</span> Add Role
               </NavLink>
             </div>
           )}
