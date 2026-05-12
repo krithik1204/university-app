@@ -8,7 +8,11 @@ import { DashboardShell } from "../features/common/DashboardShell";
 import { StudentDashboard } from "../features/student/StudentDashboard";
 import { TeacherDashboard } from "../features/teacher/TeacherDashboard";
 import { AdminDashboard } from "../features/admin/AdminDashboard";
-import { AdminManagement } from "../features/admin/AdminManagement";
+import { CreateRole } from "../features/admin/CreateRole";
+import { AssignRole } from "../features/admin/AssignRole";
+import { FacultyManagement } from "../features/admin/FacultyManagement";
+import { AddFaculty } from "../features/admin/AddFaculty";
+import { UpdateFaculty } from "../features/admin/UpdateFaculty";
 
 const normalizeRole = (role) =>
   String(role || "").toUpperCase().replace(/^ROLE_/, "");
@@ -112,12 +116,62 @@ export const AppRoutes = () => {
           }
         />
 
-        {/* Admin Management */}
+        {/* Admin User Role Management */}
         <Route
-          path="admin-management"
+          path="admin-user-role"
           element={
             <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
-              <AdminManagement />
+              <AdminDashboard />
+            </RoleBasedProtectedRoute>
+          }
+        />
+
+        {/* Admin Faculty Management */}
+        <Route
+          path="admin-faculty"
+          element={
+            <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
+              <FacultyManagement />
+            </RoleBasedProtectedRoute>
+          }
+        />
+
+        {/* Add Faculty */}
+        <Route
+          path="admin-add-faculty"
+          element={
+            <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
+              <AddFaculty />
+            </RoleBasedProtectedRoute>
+          }
+        />
+
+        {/* Update Faculty */}
+        <Route
+          path="admin-update-faculty"
+          element={
+            <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
+              <UpdateFaculty />
+            </RoleBasedProtectedRoute>
+          }
+        />
+
+        {/* Admin Create Role */}
+        <Route
+          path="admin-create-role"
+          element={
+            <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
+              <CreateRole />
+            </RoleBasedProtectedRoute>
+          }
+        />
+
+        {/* Admin Assign Role */}
+        <Route
+          path="admin-assign-role"
+          element={
+            <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
+              <AssignRole />
             </RoleBasedProtectedRoute>
           }
         />

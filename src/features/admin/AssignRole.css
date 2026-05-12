@@ -1,0 +1,267 @@
+.assign-role-section {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.assign-role-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.assign-role-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.5rem 0;
+}
+
+.assign-role-subtitle {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Roles List */
+.roles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.role-card {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.role-card:hover {
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+  border-color: #cbd5e1;
+  background-color: #ffffff;
+}
+
+.role-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.role-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.unassigned-count {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.all-assigned-message {
+  color: #64748b;
+  font-style: italic;
+  margin: 0;
+  text-align: center;
+  padding: 1rem;
+}
+
+.no-roles-message {
+  color: #64748b;
+  font-style: italic;
+  margin: 0;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Unassigned Users List */
+.unassigned-users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.user-assignment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.user-assignment-item:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 2px 8px -1px rgba(0, 0, 0, 0.05);
+}
+
+.user-assignment-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-assignment-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 0.25rem 0;
+}
+
+.user-assignment-id {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.status-message {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+.status-message.success {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.status-message.error {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+/* Assign Button */
+.assign-btn {
+  padding: 0.6rem 1rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.assign-btn:hover:not(:disabled) {
+  background-color: #2563eb;
+  box-shadow: 0 2px 8px -1px rgba(59, 130, 246, 0.3);
+}
+
+.assign-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.assign-btn:disabled {
+  background-color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+/* Loading & Error States */
+.loading-container,
+.error-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.loading-container p {
+  color: #64748b;
+  font-size: 1rem;
+}
+
+.error-container h3 {
+  color: #dc2626;
+  margin-bottom: 1rem;
+}
+
+.error-container p {
+  color: #dc2626;
+  margin: 0.5rem 0;
+  font-size: 0.875rem;
+}
+
+.retry-btn {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.retry-btn:hover {
+  background-color: #2563eb;
+}
+
+.no-users-message {
+  text-align: center;
+  padding: 2rem;
+  color: #64748b;
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .user-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .role-assignment-container {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .assign-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .assign-role-section {
+    padding: 1.5rem;
+  }
+
+  .assign-role-title {
+    font-size: 1.5rem;
+  }
+
+  .user-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .role-assignment-container {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .role-select-group,
+  .assign-btn {
+    width: 100%;
+  }
+}
