@@ -1,6 +1,5 @@
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useState } from "react";
 import "./DashboardShell.css";
 
 const normalizeRole = (role) =>
@@ -8,15 +7,8 @@ const normalizeRole = (role) =>
     .toUpperCase()
     .replace(/^ROLE_/, "");
 
-const roleRouteMap = {
-  STUDENT: "student",
-  TEACHER: "teacher",
-  ADMIN: "admin-dashboard",
-};
-
 export const DashboardShell = ({ children }) => {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const { roles } = useSelector((state) => state.auth);
 
@@ -33,7 +25,6 @@ export const DashboardShell = ({ children }) => {
     "admin-dashboard",
     "admin-role-management",
     "admin-role-create",
-    "admin-role-assign",
     "admin-faculty-management",
     "admin-faculty-create",
     "admin-faculty-update",
@@ -45,7 +36,6 @@ export const DashboardShell = ({ children }) => {
   const isUserRolePage = [
     "admin-role-management",
     "admin-role-create",
-    "admin-role-assign",
   ].includes(currentSection);
 
   const isFacultyPage = [
@@ -63,11 +53,6 @@ export const DashboardShell = ({ children }) => {
   } else if (isAdminRoute) {
     roleLabel = "Admin";
   }
-
-  const [selectedRole, setSelectedRole] =
-    useState("");
-
-
 
   const navLinkClass = ({ isActive }) =>
     isActive
@@ -142,7 +127,7 @@ export const DashboardShell = ({ children }) => {
               </NavLink>
 
               <NavLink
-                to="admin-role-assign"
+                to="admin-role-management"
                 className={({ isActive }) =>
                   isActive
                     ? "admin-quick-btn admin-quick-btn-active"

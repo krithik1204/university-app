@@ -165,16 +165,6 @@ export const AppRoutes = () => {
             </RoleBasedProtectedRoute>
           }
         />
-
-        {/* Admin Role Assign */}
-        <Route
-          path="admin-role-assign"
-          element={
-            <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
-              <AssignRole />
-            </RoleBasedProtectedRoute>
-          }
-        />
       </Route>
 
       {/* Fallback */}
