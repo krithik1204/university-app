@@ -29,6 +29,9 @@ export const DashboardShell = ({ children }) => {
     "admin-faculty-management",
     "admin-faculty-create",
     "admin-faculty-update",
+    "admin-department-management",
+    "admin-department-create",
+    "admin-department-view"
   ];
 
   const isAdminRoute =
@@ -44,6 +47,12 @@ export const DashboardShell = ({ children }) => {
     "admin-faculty-management",
     "admin-faculty-create",
     "admin-faculty-update",
+  ].includes(currentSection);
+
+    const isDepartmentPage = [
+    "admin-department-management",
+    "admin-department-create",
+    "admin-department-view",
   ].includes(currentSection);
 
   let roleLabel = "Dashboard";
@@ -106,6 +115,14 @@ export const DashboardShell = ({ children }) => {
                   Faculty Management
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  to="admin-department-management"
+                  className={navLinkClass}
+                >
+                  🏢 Department Management
+                </NavLink>
+              </li>
             </ul>
           </nav>
         )}
@@ -129,7 +146,7 @@ export const DashboardShell = ({ children }) => {
               >
                 <span>👤</span> Assign Role
               </NavLink>
-                            <NavLink
+              <NavLink
                 to="admin-role-create"
                 className={({ isActive }) =>
                   isActive
@@ -179,6 +196,34 @@ export const DashboardShell = ({ children }) => {
               </NavLink>
             </div>
           )}
+
+        {availableRoles.includes("ADMIN")  && isDepartmentPage && (
+          <div className="admin-quick-bar">
+
+            <NavLink
+              to="admin-department-create"
+              className={({ isActive }) =>
+                isActive
+                  ? "admin-quick-btn admin-quick-btn-active"
+                  : "admin-quick-btn"
+              }
+            >
+              ➕ Add Department
+            </NavLink>
+
+            <NavLink
+              to="admin-department-view"
+              className={({ isActive }) =>
+                isActive
+                  ? "admin-quick-btn admin-quick-btn-active"
+                  : "admin-quick-btn"
+              }
+            >
+              👁️ View Department
+            </NavLink>
+
+          </div>
+        )}
 
         {/* Content */}
         <section className="dashboard-content">

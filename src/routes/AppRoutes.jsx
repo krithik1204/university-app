@@ -30,10 +30,10 @@ export const AppRoutes = () => {
   const defaultSubRoute = isMultiRole
     ? "student"
     : normalizedRoles.includes("TEACHER")
-    ? "teacher"
-    : normalizedRoles.includes("ADMIN")
-    ? "admin-dashboard"
-    : "student";
+      ? "teacher"
+      : normalizedRoles.includes("ADMIN")
+        ? "admin-dashboard"
+        : "student";
 
   const defaultDashboard = `/dashboard/${defaultSubRoute}`;
 
@@ -166,7 +166,7 @@ export const AppRoutes = () => {
             </RoleBasedProtectedRoute>
           }
         />
-                <Route
+        <Route
           path="admin-role-view"
           element={
             <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
@@ -174,7 +174,28 @@ export const AppRoutes = () => {
             </RoleBasedProtectedRoute>
           }
         />
+
+        {/* Admin Department Create */}
+        <Route
+          path="admin-department-create"
+          element={
+            <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
+              <CreateRole />
+            </RoleBasedProtectedRoute>
+          }
+        />
+        <Route
+          path="admin-department-view"
+          element={
+            <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
+              <ViewRole />
+            </RoleBasedProtectedRoute>
+          }
+        />
+
       </Route>
+
+      
 
       {/* Fallback */}
       <Route path="*" element={<Navigate to="/" replace />} />

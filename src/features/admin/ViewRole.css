@@ -1,0 +1,170 @@
+@import "tailwindcss";
+@reference "tailwindcss";
+
+.view-role-section {
+  @apply bg-white border border-slate-200 rounded-3xl p-6 shadow-sm;
+}
+
+.view-role-header {
+  @apply flex flex-col gap-2 md:flex-row md:items-center md:justify-between mb-6;
+}
+
+.view-role-title {
+  @apply text-2xl font-semibold text-slate-900;
+}
+
+.view-role-subtitle {
+  @apply text-sm text-slate-600;
+}
+
+.roles-table {
+  @apply divide-y divide-slate-200;
+}
+
+.roles-row {
+  @apply grid items-center gap-4 py-4;
+  grid-template-columns: 1.4fr 2.2fr 4fr;
+}
+
+.roles-header {
+  @apply bg-slate-50 text-slate-700 font-semibold uppercase tracking-[0.12em] text-xs;
+}
+
+.role-id {
+  @apply text-slate-500 text-sm;
+}
+
+.role-name {
+  @apply text-slate-900 font-medium;
+}
+
+.role-desc {
+  @apply text-slate-600 text-sm;
+}
+
+.no-roles-message,
+.error-message,
+.empty-state {
+  @apply text-slate-500 text-sm;
+}
+
+.retry-btn {
+  @apply mt-4 inline-flex items-center justify-center rounded-full bg-sky-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500;
+}
+
+@media (max-width: 768px) {
+  .roles-row {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .roles-header {
+    @apply grid grid-cols-1 gap-4;
+  }
+}
+
+/* Page wrapper */
+.view-role-section {
+  padding: 24px;
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+.view-role-header {
+  margin-bottom: 16px;
+}
+
+.view-role-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.view-role-subtitle {
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+/* Table container */
+.roles-table {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Row base */
+.roles-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 2fr;
+  padding: 12px 16px;
+  align-items: center;
+}
+
+/* Header row */
+.roles-header {
+  background-color: #111827;
+  color: white;
+  font-weight: 600;
+}
+
+/* EVEN rows (light) */
+.roles-row:nth-child(even) {
+  background-color: #f3f4f6;
+}
+
+/* ODD rows (darker / thicker feel) */
+.roles-row:nth-child(odd) {
+  background-color: #e5e7eb;
+  font-weight: 500;
+}
+
+/* Hover effect */
+.roles-row:hover {
+  background-color: #dbeafe;
+  transition: 0.2s;
+}
+
+/* Cell styles */
+.role-id {
+  color: #374151;
+}
+
+.role-name {
+  font-weight: 600;
+  color: #111827;
+}
+
+.role-desc {
+  color: #6b7280;
+}
+
+/* Error UI */
+.error-title {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.error-text {
+  color: #374151;
+  margin-top: 6px;
+}
+
+/* Retry button */
+.retry-btn {
+  margin-top: 12px;
+  padding: 8px 14px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.retry-btn:hover {
+  background: #1d4ed8;
+}
+
+/* Empty state */
+.no-roles-message {
+  color: #6b7280;
+}
