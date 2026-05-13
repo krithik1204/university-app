@@ -14,6 +14,9 @@ import { AssignRole } from "../features/admin/AssignRole";
 import { FacultyManagement } from "../features/admin/FacultyManagement";
 import { AddFaculty } from "../features/admin/AddFaculty";
 import { UpdateFaculty } from "../features/admin/UpdateFaculty";
+import { DepartmentManagement } from "../features/admin/DepartmentManagement";
+import { AddDepartment } from "../features/admin/AddDepartment";
+import { ViewDepartment } from "../features/admin/ViewDepartment";
 
 const normalizeRole = (role) =>
   String(role || "").toUpperCase().replace(/^ROLE_/, "");
@@ -175,20 +178,32 @@ export const AppRoutes = () => {
           }
         />
 
+        {/* Admin Department Management */}
+        <Route
+          path="admin-department-management"
+          element={
+            <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
+              <DepartmentManagement />
+            </RoleBasedProtectedRoute>
+          }
+        />
+
         {/* Admin Department Create */}
         <Route
           path="admin-department-create"
           element={
             <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
-              <CreateRole />
+              <AddDepartment />
             </RoleBasedProtectedRoute>
           }
         />
+
+        {/* Admin Department View */}
         <Route
           path="admin-department-view"
           element={
             <RoleBasedProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
-              <ViewRole />
+              <ViewDepartment />
             </RoleBasedProtectedRoute>
           }
         />
