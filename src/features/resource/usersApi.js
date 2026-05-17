@@ -104,5 +104,14 @@ export const deleteUser = async (token, userId) => {
   return usersService.delete(token, userId);
 };
 
+export const getUsersByRole = async (token, role) => {
+  try {
+    return await usersService.getUsersByRole(token, role);
+  } catch (error) {
+    console.error("Error fetching users data:", error);
+    throw error; // Re-throw the formatted error from baseApi
+  }
+};
+
 // Export the base service for advanced usage
 export { usersService };

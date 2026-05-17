@@ -164,6 +164,14 @@ export const createApiService = (resourceName, apiInstance) => {
         () => apiInstance.delete(`${baseUrl}/${id}`),
         `delete ${resourceName}`
       );
-    }
+    },
+    getUsersByRole: async (token, role) => {
+      setAuthToken(apiInstance, token);
+
+      return executeApiCall(
+        () => apiInstance.get(`${baseUrl}?role=${role}`),
+        `fetch users by role`
+      );
+    },
   };
 };

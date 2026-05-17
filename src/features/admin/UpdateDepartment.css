@@ -1,0 +1,63 @@
+@import "tailwindcss";
+@reference "tailwindcss";
+
+.update-department-section {
+  @apply bg-white border border-slate-200 rounded-3xl p-6 shadow-sm;
+}
+
+.update-department-header {
+  margin-bottom: 2rem;
+}
+
+.update-department-title {
+  @apply text-2xl font-semibold text-slate-900 mb-2;
+}
+
+.update-department-subtitle {
+  @apply text-sm text-slate-600 mb-6;
+}
+
+.update-department-form {
+  @apply space-y-4;
+}
+
+.form-group {
+  @apply flex flex-col;
+}
+
+.form-label {
+  @apply text-sm font-medium text-slate-700 mb-2;
+}
+
+.form-input {
+  @apply px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-200 disabled:bg-slate-100 disabled:text-slate-500;
+}
+
+.form-message {
+  @apply p-3 rounded-lg text-sm;
+}
+
+.form-message-success {
+  @apply bg-green-50 text-green-700 border border-green-200;
+}
+
+.form-message-error {
+  @apply bg-red-50 text-red-700 border border-red-200;
+}
+
+.form-actions {
+  @apply flex gap-3 justify-end mt-6;
+}
+
+.submit-btn,
+.cancel-btn {
+  @apply px-6 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.submit-btn {
+  @apply bg-blue-500 text-white hover:bg-blue-600;
+}
+
+.cancel-btn {
+  @apply bg-slate-300 text-slate-700 hover:bg-slate-400;
+}

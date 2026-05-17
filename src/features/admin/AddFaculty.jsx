@@ -1,23 +1,56 @@
 import "./AddFaculty.css";
-import { useState, useCallback } from "react";
-
+import { useState, useCallback, useEffect } from "react";
+import { getDepartments } from "../resource/departmentApi";
+import { createFaculty } from "../resource/facultyApi";
+import { getUsersByRole } from "../resource/usersApi"
 /**
  * AddFaculty Component
  * Form component for adding new faculty members
  */
 export const AddFaculty = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    department: "",
-    specialization: "",
-    phone: ""
+    facultyId: "",
+    departmentId: "",
+    designation: ""
   });
 
+  const [departments, setDepartments] = useState([]);
+  const [faculties, setFaculties] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [initLoading, setInitLoading] = useState(false);
   const [message, setMessage] = useState({ type: "", text: "" });
+  const [initError, setInitError] = useState(null);
 
   const accessToken = sessionStorage.getItem("accessToken");
+
+  const fetchInitialData = useCallback(async () => {
+    if (!accessToken) {
+      setInitError("Not authenticated. Please log in to load faculty and department data.");
+      return;
+    }
+
+    setInitLoading(true);
+    setInitError(null);
+
+    try {
+      const [deps, facs] = await Promise.all([
+        getDepartments(accessToken),
+        getUsersByRole(accessToken, "TEACHER")
+      ]);
+
+      setDepartments(Array.isArray(deps) ? deps : []);
+      setFaculties(Array.isArray(facs) ? facs : []);
+    } catch (error) {
+      console.error("Error fetching initial data:", error);
+      setInitError(error.message || "Failed to load faculty and department data");
+    } finally {
+      setInitLoading(false);
+    }
+  }, [accessToken]);
+
+  useEffect(() => {
+    fetchInitialData();
+  }, [fetchInitialData]);
 
   /**
    * Handles input field changes
@@ -36,10 +69,10 @@ export const AddFaculty = () => {
   const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
 
-    if (!formData.name || !formData.email || !formData.department) {
+    if (!formData.facultyId || !formData.departmentId || !formData.designation) {
       setMessage({
         type: "error",
-        text: "Please fill in all required fields (Name, Email, Department)"
+        text: "Please fill in all required fields (Faculty User, Department, Designation)"
       });
       return;
     }
@@ -48,11 +81,14 @@ export const AddFaculty = () => {
     setMessage({ type: "", text: "" });
 
     try {
-      // TODO: Replace with actual API call to add faculty
-      // const result = await addFaculty(accessToken, formData);
-      
-      console.log("Faculty data:", formData);
-      
+      const payload = {
+        userId: formData.facultyId,
+        departmentId: formData.departmentId,
+        designation: formData.designation
+      };
+
+      await createFaculty(accessToken, payload);
+
       setMessage({
         type: "success",
         text: "Faculty member added successfully!"
@@ -60,11 +96,9 @@ export const AddFaculty = () => {
 
       // Reset form
       setFormData({
-        name: "",
-        email: "",
-        department: "",
-        specialization: "",
-        phone: ""
+        facultyId: "",
+        departmentId: "",
+        designation: ""
       });
 
       setTimeout(() => {
@@ -90,79 +124,78 @@ export const AddFaculty = () => {
       </div>
 
       <form onSubmit={handleSubmit} className="add-faculty-form">
+        {initError && (
+          <div className="init-error">
+            <p>{initError}</p>
+            <button
+              type="button"
+              onClick={fetchInitialData}
+              className="retry-btn"
+              disabled={initLoading}
+            >
+              {initLoading ? "Retrying..." : "Retry"}
+            </button>
+          </div>
+        )}
+
         <div className="form-group">
-          <label htmlFor="name" className="form-label">Full Name *</label>
+          <label htmlFor="facultyId" className="form-label">Faculty User *</label>
+          <select
+            id="facultyId"
+            name="facultyId"
+            value={formData.facultyId}
+            onChange={handleInputChange}
+            className="form-input"
+            required
+            disabled={loading || initLoading}
+          >
+            <option value="">-- Select Faculty --</option>
+            {faculties.map((faculty) => (
+              <option key={faculty.id} value={faculty.id}>
+                {faculty.name || `Faculty ${faculty.id}`}
+              </option>
+            ))}
+          </select>
+        </div>
+
+
+
+        <div className="form-group">
+          <label htmlFor="departmentId" className="form-label">Department *</label>
+          <select
+            id="departmentId"
+            name="departmentId"
+            value={formData.departmentId}
+            onChange={handleInputChange}
+            className="form-input"
+            required
+            disabled={loading || initLoading}
+          >
+            <option value="">-- Select Department --</option>
+            {departments.map((dept) => (
+              <option key={dept.id || dept.code || dept.name} value={dept.id}>
+                {dept.name || dept.departmentName || dept.code}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="designation" className="form-label">Designation *</label>
           <input
             type="text"
-            id="name"
-            name="name"
-            value={formData.name}
+            id="designation"
+            name="designation"
+            value={formData.designation}
             onChange={handleInputChange}
-            placeholder="Enter faculty member's full name"
+            placeholder="Enter designation (e.g. Professor)"
             className="form-input"
             required
             disabled={loading}
           />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="email" className="form-label">Email Address *</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            placeholder="Enter email address"
-            className="form-input"
-            required
-            disabled={loading}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="department" className="form-label">Department *</label>
-          <input
-            type="text"
-            id="department"
-            name="department"
-            value={formData.department}
-            onChange={handleInputChange}
-            placeholder="Enter department name"
-            className="form-input"
-            required
-            disabled={loading}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="specialization" className="form-label">Specialization</label>
-          <input
-            type="text"
-            id="specialization"
-            name="specialization"
-            value={formData.specialization}
-            onChange={handleInputChange}
-            placeholder="Enter area of specialization"
-            className="form-input"
-            disabled={loading}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="phone" className="form-label">Phone Number</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleInputChange}
-            placeholder="Enter phone number"
-            className="form-input"
-            disabled={loading}
-          />
-        </div>
-
+        
         {message.text && (
           <div className={`form-message form-message-${message.type}`}>
             {message.type === "success" ? "✓" : "✗"} {message.text}
@@ -171,7 +204,7 @@ export const AddFaculty = () => {
 
         <button
           type="submit"
-          disabled={loading}
+          disabled={loading || initLoading}
           className="submit-btn"
         >
           {loading ? "Adding Faculty..." : "Add Faculty Member"}
